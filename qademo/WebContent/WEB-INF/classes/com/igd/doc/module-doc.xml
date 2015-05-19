@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!--配置action -->
+	<bean id="documentAction" class="com.igd.doc.action.DocumentAction"  scope="prototype">
+		<property name="docService">
+			<ref bean="docService"/>
+		</property>
+	</bean>	
+	<!--配置service -->
+	<bean id="docService" class="com.igd.doc.service.DocumentServiceImp"  scope="prototype">
+		<property name="docDAO">
+			<ref bean="docDAO"/>
+		</property>
+	</bean>	
+	<!--配置DAO -->
+	<bean id="docDAO" class="com.igd.doc.dao.DocumentDAOImp"  scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
+</beans>

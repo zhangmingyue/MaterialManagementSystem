@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>
+	<class name="com.igd.baseinfo.model.Storageinfo" table="storage_info">
+	<id name="id"  type="java.lang.String" column="st_id">
+			<generator class="uuid.hex"/>
+	</id> 
+	<property name="num" column="st_num" />
+	<property name="name" column="st_name" />
+	<property name="remark" column="remark" />
+	<property name="type" column="type" />
+	<property name="type_id" column="type_id" />
+	<property name="status" column="status" />
+	<set name="managers" lazy="false" inverse="true" cascade="none" table="managerinfo">
+		<key column="stroe_id"/>
+		<one-to-many class="com.igd.baseinfo.model.Managerinfo"/>
+	</set>
+	<set name="sw" lazy="false"  inverse="true" table="storeandworker">
+		<key column="st_id"/>
+		<one-to-many class="com.igd.baseinfo.model.Storeandworker"/>
+	</set>
+	</class>
+	
+</hibernate-mapping>

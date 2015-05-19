@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.igd.admin.model.Code" table="sys_code">
+    	<id name="id" type="java.lang.String" column="s_id">
+			<generator class="uuid.hex"/>
+		</id>
+		<many-to-one name="codeCategory" class="com.igd.admin.model.CodeCategory" column="s_codeCategory_id" lazy="false"/>
+        <property name="code" column="s_code" />
+        <property name="name" column="s_name" />
+        <property name="state" column="s_state" />
+        <property name="remark" column="s_remark" />
+    </class>
+</hibernate-mapping>

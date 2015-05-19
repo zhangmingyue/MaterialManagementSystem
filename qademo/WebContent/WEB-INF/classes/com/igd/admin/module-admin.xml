@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	
+	<bean id="loginAction" class="com.igd.admin.action.LoginAction"  scope="prototype">
+		<property name="loginService">
+			<ref bean="loginService"/>
+		</property>
+		<property name="deptService">
+			<ref bean="deptService"/>
+		</property>
+		
+	</bean>
+	
+	<bean id="deptAction" class="com.igd.admin.action.DeptAction"  scope="prototype">
+		<property name="deptService">
+			<ref bean="deptService"/>
+		</property>
+	</bean>
+	
+	<bean id="roleAction" class="com.igd.admin.action.RoleAction"  scope="prototype">
+		<property name="deptService">
+			<ref bean="deptService"/>
+		</property>
+		<property name="roleService">
+			<ref bean="roleService"/>
+		</property>
+		<property name="menuTreeService">
+			<ref bean="menuTreeService"/>
+		</property>
+	</bean>
+	
+	<bean id="userAction" class="com.igd.admin.action.UserAction"  scope="prototype">
+		<property name="deptService">
+			<ref bean="deptService"/>
+		</property>
+		<property name="roleService">
+			<ref bean="roleService"/>
+		</property>
+		<property name="userService">
+			<ref bean="userService"/>
+		</property>
+	</bean>
+	
+	<bean id="codeAction" class="com.igd.admin.action.CodeAction"  scope="prototype">
+		<property name="codeService">
+			<ref bean="codeService"/>
+		</property>
+	</bean>
+	
+	
+    <!-- 部署系统用户管理业务数据库访问类 LoginDaoImpl-->
+	<bean id="loginDao" class="com.igd.admin.dao.LoginDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 部署系统权限管理业务数据库访问类 RoleDaoImpl-->
+	<bean id="userDao" class="com.igd.admin.dao.UserDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 部署系统用户管理业务数据库访问类 LoginDaoImpl-->
+	<bean id="deptDao" class="com.igd.admin.dao.DeptDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 部署系统权限管理业务数据库访问类 RoleDaoImpl-->
+	<bean id="roleDao" class="com.igd.admin.dao.RoleDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 系统菜单业务数据库访问类 MenuTreeDaoImpl -->
+	<bean id="menuTreeDao" class="com.igd.admin.dao.MenuTreeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- 代码维护业务数据库访问类 CodeDaoImpl -->
+	<bean id="codeDao" class="com.igd.admin.dao.CodeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<!-- 部署系统菜单管理业务逻辑组件MenuTreeServiceImpl -->
+	<bean id="menuTreeService" class="com.igd.admin.service.MenuTreeServiceImpl">
+        <property name="menuTreeDao">
+        	<ref bean="menuTreeDao" />
+        </property>
+	</bean>
+	
+	<!-- 部署系统用户管理业务逻辑组件LoginServiceImpl -->
+	<bean id="loginService" class="com.igd.admin.service.LoginServiceImpl">
+        <property name="loginDao">
+        	<ref bean="loginDao" />
+        </property>
+    </bean>
+    
+    <!-- 部署系统用户管理业务逻辑组件LoginServiceImpl -->
+	<bean id="deptService" class="com.igd.admin.service.DeptServiceImpl">
+        <property name="deptDao">
+        	<ref bean="deptDao" />
+        </property>
+    </bean>
+    
+    <!-- 部署系统权限管理业务逻辑组件LoginServiceImpl -->
+	<bean id="roleService" class="com.igd.admin.service.RoleServiceImpl">
+        <property name="roleDao">
+        	<ref bean="roleDao" />
+        </property>
+    </bean>
+    
+	 <!-- 部署系统用户管理业务逻辑组件LoginServiceImpl -->
+	<bean id="userService" class="com.igd.admin.service.UserServiceImpl">
+        <property name="userDao">
+        	<ref bean="userDao" />
+        </property>
+    </bean>
+    
+     <!-- 部署系统用户管理业务逻辑组件CodeServiceImpl -->
+	<bean id="codeService" class="com.igd.admin.service.CodeServiceImpl">
+        <property name="codeDao">
+        	<ref bean="codeDao" />
+        </property>
+    </bean>
+    
+    <bean id="loginRemoteInterface" class="com.igd.admin.webService.LoginRemoteInterface">
+        <property name="loginService">
+        	<ref bean="loginService" />
+        </property>
+    </bean>
+    
+</beans>

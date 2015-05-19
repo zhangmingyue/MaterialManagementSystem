@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd" >
+<struts>
+	<package name="document" namespace="/document" extends="default">
+	<!-- StorageinfoAction 仓库信息 -->
+        <action name="documentAction" class="com.igd.doc.action.DocumentAction">
+	        <result name="pagedQuery">/document/DocumentManage/list.jsp</result>
+	        <result name="error">/error.jsp</result>
+	         <result name="remove" type="redirectAction">storageinfo!pagedQuery.action</result>
+	         
+	        <result name="edit">/document/DocumentManage/edit.jsp</result>
+	         <result name="queryById">DocumentManage/edit.jsp</result>
+	    	<result name="queryAdd">DocumentManage/edit.jsp</result>
+	    	<result name="view">DocumentManage/view.jsp</result>
+	    	<result name="choosePurchase">DocumentManage/chosePurchase.jsp</result>
+	    	<result name="chooseGoods">DocumentManage/choseGoods.jsp</result>
+	    	<result name="recycle">recycle/list.jsp</result>
+	         <interceptor-ref name="baseStack" />
+	         
+        </action> 
+       
+      </package>
+</struts>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="login" extends="default">
+        <action name="login" class="loginAction">
+        	<!-- 在Action中配置wait页面 -->
+       	 	<result name="success">/index.jsp</result>
+       	 	<result name="login">/index.jsp</result>
+            <result name="reLogin" type="redirect">
+        		<param name="location">/login.jsp</param>
+      		</result>  
+        	<interceptor-ref name="baseStack"></interceptor-ref>
+        </action>
+    </package>
+    
+    <package name="admin" namespace="/admin" extends="default">
+    	<!-- 部门维护模块 -->
+	    <action name="dept" class="deptAction">
+	      <result name="pagedQuery" type="dispatcher">
+	        <param name="location">dept/list.jsp</param>
+	      </result>
+	      <result name="save" type="redirect">dept!queryById.action?id=${id}</result>
+	      <result name="remove" type="redirect">dept!pagedQuery.action</result>
+	      <result name="queryById" type="dispatcher">
+	        <param name="location">dept/edit.jsp</param>
+	      </result>
+	      <interceptor-ref name="baseStack" />
+	    </action>
+	    
+	    <!-- 角色维护模块 -->
+	    <action name="role" class="roleAction">
+	      <result name="pagedQuery" type="dispatcher">
+	        <param name="location">role/list.jsp</param>
+	      </result>
+	      <result name="save" type="redirect">role!queryById.action?id=${role.id}</result>
+	      <result name="remove" type="redirect">role!pagedQuery.action</result>
+	      <result name="queryById" type="dispatcher">
+	        <param name="location">role/edit.jsp</param>
+	      </result>
+	      <result name="showMenu" type="dispatcher">
+	        <param name="location">role/showMenu.jsp</param>
+	      </result>
+	       <result name="setRoleMenu" type="redirect">role!showRoleMenus.action?id=${id}</result>
+	      <interceptor-ref name="baseStack" />
+	    </action>
+	    
+	    <!-- 用户维护模块 -->
+	    <action name="user" class="userAction">
+	      <result name="pagedQuery" type="dispatcher">
+	        <param name="location">user/list.jsp</param>
+	      </result>
+	      <!-- <result name="save" type="redirect">user!pagedQuery.action?condition.deptId=${deptId}</result>  -->
+	      <result name="save" type="redirect">user!queryById.action?id=${user.id}&amp;deptId=${deptId}</result>
+	      <result name="update" type="redirect">user!queryById.action?id=${id}</result>
+	      <result name="remove" type="redirect">user!pagedQuery.action?condition.deptId=${deptId}</result>
+	      <result name="savepwd" type="redirect">user/editp.jsp</result>
+	      <result name="queryById" type="dispatcher">
+	        <param name="location">user/edit.jsp</param>
+	   
+	      </result>
+	      <interceptor-ref name="baseStack" />
+	    </action>
+	    
+	    <!-- 代码维护模块 -->
+	    <action name="code" class="codeAction">
+	      <result name="pagedQuery" type="dispatcher">
+	        <param name="location">code/list.jsp</param>
+	      </result>
+	      <result name="save" type="redirect">code!pagedQuery.action</result>
+	      <result name="saveCode" type="redirect">code!showCode.action?id=${id}</result>
+	      <result name="removeCode" type="redirect">code!showCode.action?id=${id}</result>
+	      <result name="update" type="redirect">code!queryById.action?id=${id}</result>
+	      <result name="remove" type="redirect">code!pagedQuery.action</result>
+	      <result name="queryById" type="dispatcher">
+	      <param name="location">code/edit.jsp</param>
+	      </result>
+	      <result name="showCode" type="dispatcher">
+	        <param name="location">code/codeList.jsp</param>
+	      </result>
+	      <interceptor-ref name="baseStack" />
+	    </action>
+	    
+	</package>
+</struts>

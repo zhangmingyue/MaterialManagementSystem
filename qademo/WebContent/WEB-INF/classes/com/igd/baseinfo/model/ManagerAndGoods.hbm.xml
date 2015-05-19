@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>
+	<class name="com.igd.baseinfo.model.ManagerAndGoods" table="managerandgoods">
+	<id name="id"  type="java.lang.String" column="id">
+			<generator class="uuid.hex"/>
+	</id> 
+	<many-to-one name="manager" lazy="false" cascade="save-update" class="com.igd.baseinfo.model.Managerinfo" column="mid"   />
+ 	<many-to-one name="goods"  lazy="false"  cascade="save-update"   class="com.igd.baseinfo.model.Goodsbase" column="gid"   />
+ 
+	  
+	</class>
+	
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://getahead.org/dwr/dwr20.dtd">
+
+<dwr> 
+	<allow>
+
+   
+		<convert converter="bean" match="com.igd.admin.model.Menu"/> 
+        <create creator="spring" javascript="menuTreeService">
+            <param name="beanName" value="menuTreeService"/>
+            <include method="getAccreditMenu"/> 
+        </create> 
+ 
+		
+		
+		<convert converter="bean" match="com.igd.admin.model.Code"/> 
+		<create creator="spring" javascript="codeService">
+			<param name="beanName" value="codeService" />
+			<include method="queryLikeCode"/>
+			<include method="inintArea"/>  
+		
+		</create>
+		
+		<convert converter="bean" match="com.igd.baseinfo.model.Purchaseinfo"/> 
+		<convert converter="bean" match="com.igd.baseinfo.model.Goodsbase"/> 
+		<convert converter="bean" match="com.igd.doc.model.SinglePrice"/>
+		<create creator="spring" javascript="docService">
+			<param name="beanName" value="docService" />
+			<include method="queryPurch"/>
+			<include method="queryGoods"/>
+			<include method="queryGood"/>
+			<include method="queryPrice"/>
+		</create>
+		
+		
+	</allow>
+		
+</dwr>

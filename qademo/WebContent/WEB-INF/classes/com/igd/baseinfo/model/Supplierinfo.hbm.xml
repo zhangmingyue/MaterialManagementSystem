@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>
+	<class name="com.igd.baseinfo.model.Supplierinfo" table="supplierinfo">
+	<id name="id"  type="java.lang.String" column="si_id">
+			<generator class="uuid.hex"/>
+	</id> 
+	<property name="link" column="link" />
+	<property name="name" column="si_name" />
+	<property name="linkman" column="linkman" />
+	<property name="addr" column="addr" />
+	<property name="status" column="status" />
+	<property name="spell" column="spell" />
+	<property name="remark" column="remark" />
+	<property name="cl_id" column="cl_id" />
+	<property name="cl_num" column="cl_num" />
+	<!-- 
+	<many-to-one name="code"  lazy="false" class="com.igd.admin.model.Code" column="cl_id"   />
+ 	
+	   -->
+	  <set name="sgs" lazy="false"  inverse="true" table="supandgoods">
+		<key column="sp_id"/>
+		<one-to-many class="com.igd.baseinfo.model.SupAndGoods"/>
+	</set>
+	</class>
+	
+</hibernate-mapping>
